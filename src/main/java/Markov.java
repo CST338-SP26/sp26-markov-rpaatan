@@ -1,7 +1,9 @@
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Markov {
     private static String BEGINS_SENTENCE = "__$";
@@ -11,15 +13,10 @@ public class Markov {
 
     // CONSTRUCTOR(S)
     public Markov() {
-        ArrayList<String> temp = new ArrayList<String>();
         prevWord = BEGINS_SENTENCE;
 
-        // TODO: Ask about hashmap initialization
-        //      -- unsure of how to intialize with parameters as i get continous errors.
-       // Presuming it looks like this for now:
         words = new HashMap<String, ArrayList<String>>();
         words.put(BEGINS_SENTENCE, new ArrayList<>());
-
     }
 
     // GETTER & SETTER METHODS
@@ -50,8 +47,12 @@ public class Markov {
 
     public void addFromFile(String filename) {
         try {
-            FileReader fr = new FileReader(filename);
-            // TODO: figure this out. reference past notes.
+            File fr = new File(filename);
+            Scanner fs = new Scanner(fr);
+
+            while(fs.hasNextLine()) {
+                addLine(fs.nextLine());
+            }
         } catch (Exception e) {
             System.out.println("File provided generated an error.");
         }
@@ -65,11 +66,11 @@ public class Markov {
         if(endsWithPunctuation(prevWord)) {
             // current word is added under the BEGINS_SENTENCE key in the words hashmap.
             words.get(BEGINS_SENTENCE).add(word);
-        } else {
-            if(words.containsKey(prevWord)) {
-                // if the previous word is present as a key, add current word to the prev key's array list
+        } else if (!endsWithPunctuation(prevWord)) {
+            if(words.containsKey(words.get(prevWord))) {
+                // if the previous word is present as in a key, or as a key, add current word to the prev key's array list
               words.get(prevWord).add(word);
-            } else {
+            } else if (!words.containsKey(words.get(prevWord))) {
                 words.put(word, new ArrayList<String>());
             }
         }
@@ -79,22 +80,32 @@ public class Markov {
 
     String randomWord(String wordKey) {
         // utilize the key to get an arraylist of words from the hashmap.
-        ArrayList<String> wordsList = words.get(wordKey);
+//        ArrayList<String> wordsList = words.get(wordKey);
 
         Random r = new Random();
-        int randomWordIndex = r.nextInt(wordsList.size() + 1);
+        ArrayList<String> test = words.get(wordKey);
+        try {
+            int testInt = test.size();
+        }
+        catch (Exception e) {
+            return null;
+        }
+
+        int randomWordIndex = r.nextInt(words.get(wordKey).size());
         // generate a random location, then get that word and return it.
 
-        return wordsList.get(randomWordIndex);
+        return words.get(wordKey).get(randomWordIndex);
     }
 
 
     void addLine(String newLine) {
-        if(newLine.isEmpty()) {
-            return;
-        }
-
-        // TODO: figure out how to split the string newLine into individual words?
+            if(newLine.isEmpty()) {
+                return;
+            }
+            String[] seperated = newLine.split(" ");
+            for(String s :seperated) {
+                addWord(s);
+            }
     }
 
     public static boolean endsWithPunctuation(String word) {

@@ -1,3 +1,12 @@
+/**
+ * @author Rhu Paatan (rpaatan)
+ * @version 0.1.0
+ * @Since 1/20/26
+ *
+ * Program Description: Jotto, a program / game prompting the player to guess a five-letter word.
+ * Additional Comments: Only unfinished method is ToString, not all tests pass but code attempts each problem.
+ **/
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +42,6 @@ public class Markov {
         StringBuilder sentence = new StringBuilder();
         Random r = new Random();
 
-        // TODO: clean up this code when you're more awake.
         do {
             randomWordIndex = r.nextInt((words.get(BEGINS_SENTENCE)).size() + 1);
             currentWord = (words.get(BEGINS_SENTENCE)).get(randomWordIndex);
@@ -63,11 +71,9 @@ public class Markov {
 
     void addWord(String word){
         if(endsWithPunctuation(prevWord)) {
-            // current word is added under the BEGINS_SENTENCE key in the words hashmap.
             words.get(BEGINS_SENTENCE).add(word);
         } else if (!endsWithPunctuation(prevWord)) {
             if(words.containsKey(words.get(prevWord))) {
-                // if the previous word is present as in a key, or as a key, add current word to the prev key's array list
               words.get(prevWord).add(word);
             } else if (!words.containsKey(words.get(prevWord))) {
                 words.put(word, new ArrayList<String>());
@@ -78,9 +84,14 @@ public class Markov {
     }
 
     String randomWord(String wordKey) {
-        Random r = new Random();
+        // utilize the key to get an arraylist of words from the hashmap.
+        ArrayList<String> wordsList = words.get(wordKey);
 
-        return wordKey;
+        Random r = new Random();
+        int randomWordIndex = r.nextInt(wordsList.size() + 1);
+        // generate a random location, then get that word and return it.
+
+        return wordsList.get(randomWordIndex);
     }
 
 
@@ -95,16 +106,13 @@ public class Markov {
     }
 
     public static boolean endsWithPunctuation(String word) {
-      // TODO: clean up this code when ur more awake.
         try {
-            // run over all punctuation options, then if they equal the end of given word return true.
             for(int i = 0; i < PUNCTUATION_MARKS.length(); i++ ){
                 if (PUNCTUATION_MARKS.charAt(i) == word.charAt(word.length()-1)) {
                     return true;
                 }
             }
 
-            // if nothing at the end of our word matches possible punctuation marks, return false.
             return false;
         }
         catch(Exception e) {

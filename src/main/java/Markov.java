@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -79,22 +78,9 @@ public class Markov {
     }
 
     String randomWord(String wordKey) {
-        // utilize the key to get an arraylist of words from the hashmap.
-//        ArrayList<String> wordsList = words.get(wordKey);
-
         Random r = new Random();
-        ArrayList<String> test = words.get(wordKey);
-        try {
-            int testInt = test.size();
-        }
-        catch (Exception e) {
-            return null;
-        }
 
-        int randomWordIndex = r.nextInt(words.get(wordKey).size());
-        // generate a random location, then get that word and return it.
-
-        return words.get(wordKey).get(randomWordIndex);
+        return wordKey;
     }
 
 

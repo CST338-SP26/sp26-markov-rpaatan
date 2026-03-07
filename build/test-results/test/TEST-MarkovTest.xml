@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MarkovTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-03-06T21:17:15" hostname="HPENVYX360" time="0.024">
+<testsuite name="MarkovTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-03-06T21:41:33" hostname="HPENVYX360" time="0.027">
   <properties/>
-  <testcase name="getWords()" classname="MarkovTest" time="0.024">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
+  <testcase name="randomWord()" classname="MarkovTest" time="0.027">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;there.&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;there.&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
-	at app//org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:180)
-	at app//MarkovTest.getWords(MarkovTest.java:89)
+	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1142)
+	at app//MarkovTest.randomWord(MarkovTest.java:125)
 	at java.base@11.0.29/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base@11.0.29/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base@11.0.29/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -97,9 +97,6 @@
 </failure>
   </testcase>
   <system-out><![CDATA[Making the file...
-Testing getWords
-	Size check: Expected == 2
-	correct structure: {there.=[], __$=[Hello]}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
